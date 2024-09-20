@@ -227,17 +227,21 @@ public class BinaryTree {
     }
 
     private void replaceValueRecursive(Node node, int oldVal, int newVal) {
+        // If node is null, just return
         if (node == null) {
             return;
         }
 
+        // If current nodes data matches 'oldVal' update to 'newVal'
         if (node.data == oldVal) {
             node.data = newVal;
         }
 
+        // Recurisvly call this function for the left and right children
         replaceValueRecursive(node.left, oldVal, newVal);
         replaceValueRecursive(node.right, oldVal, newVal);
     }
+    
 
     /*
      * private method findMinHelper()
@@ -258,13 +262,16 @@ public class BinaryTree {
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
 
+        // If current node is null return max integer to indicate so
         if (node == null) {
             return Integer.MAX_VALUE;
         }
 
+        // Recusively find minimum value in left and right subtrees
         int left = findMinHelper(node.left);
         int right = findMinHelper(node.right);
 
+        // Return minimum of current nodes data both left and right
         return Math.min(node.data, Math.min(left, right));
     }
 
@@ -289,12 +296,16 @@ public class BinaryTree {
 
         // return -1; // RECALL, IF TREE IS EMPTY, RETURN -1
 
+        
+        // If current node is null there's no nodes to count, return 0
         if (node == null) {
             return 0;
         }
 
+        // Count this node if the data is greater than 'val'
         int count = (node.data > val) ? 1 : 0;
 
+        // Recurisvely count nodes in subtrees on the left and right
         count += nodesGTHelper(node.left, val);
         count += nodesGTHelper(node.right, val);
 
@@ -337,13 +348,16 @@ public class BinaryTree {
         // COUNT LOCATIONS IN THE RETURNED ARRAY AS SHOWN BELOW, ELSE
         // THE 'SUM' IS RETURNED IN INDEX LOCATION 0, AND COUNT IS LOCATION 1
 
+        // If current node is null, return array with 0 for both sum and count
         if (n == null) {
             return new int[]{0, 0};
         }
 
+        // Recursively get the sum and count from left and right children
         int[] leftResult = averageHelper(n.left);
         int[] rightResult = averageHelper(n.right);
 
+        // Calculate sum and count totals for the current node 
         int totalSum = leftResult[0] + rightResult[0] + n.data;
         int totalCount = leftResult[1] + rightResult[1] +1;
 
